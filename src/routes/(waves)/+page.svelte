@@ -13,11 +13,29 @@
 	let { features, posts } = data;
 </script>
 
-<div class="container">
+<div class="hero-about-section">
 	<Hero />
 	<About />
-	{#if posts && posts.length > 0}
-		<RecentPosts {posts} />
-	{/if}
-	<Features {features} />
 </div>
+{#if posts && posts.length > 0}
+	<div class="container">
+		<RecentPosts {posts} />
+	</div>
+{/if}
+
+<!-- <Features {features} /> -->
+
+<style>
+	.hero-about-section {
+		height: 100vh;
+		height: 100dvh; /* Dynamic viewport height for mobile */
+		display: flex;
+		flex-direction: column;
+	}
+
+	.hero-about-section :global(#about) {
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
+</style>

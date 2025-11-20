@@ -8,12 +8,12 @@
 
 <header class:has-background={showBackground}>
 	<nav class="container">
-		<a class="logo" href="/" aria-label="Site logo">
+		<!-- <a class="logo" href="/" aria-label="Site logo">
 			<Logo />
-		</a>
+		</a> -->
 		<div class="links">
 			<a href="/blog">Blog</a>
-			<RssLink />
+			<!-- <RssLink /> -->
 			<ThemeToggle />
 		</div>
 	</nav>
@@ -66,6 +66,7 @@
 			align-items: center;
 			justify-content: flex-end;
 			gap: 30px;
+			margin-left: auto;
 
 			a {
 				text-decoration: none;

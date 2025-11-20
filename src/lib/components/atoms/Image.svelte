@@ -37,12 +37,20 @@
 	}
 </script>
 
-<img srcset={buildSrcset()} {src} {alt} loading="lazy" decoding="async" class:full-bleed={fullBleed} />
+<img
+	srcset={buildSrcset()}
+	{src}
+	{alt}
+	loading="lazy"
+	decoding="async"
+	class:full-bleed={fullBleed}
+/>
 
 <style lang="scss">
 	img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
+		border-radius: 50%;
+		width: 300px;
+		height: 300px;
+		object-fit: cover;
 	}
 </style>

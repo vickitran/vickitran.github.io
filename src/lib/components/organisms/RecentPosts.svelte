@@ -7,12 +7,7 @@
 	export let posts: BlogPost[];
 </script>
 
-<ContentSection
-	id="recent-posts"
-	title="Blog posts"
-	description="This section shows the 4 most recent blog posts. Check them out for tips on how to get started!"
-	align="left"
->
+<ContentSection id="recent-posts" title="Blog posts" align="left">
 	<div slot="button">
 		<Button href="/blog">View More</Button>
 	</div>
@@ -24,7 +19,8 @@
 				excerpt={post.excerpt}
 				tags={post.tags}
 				readingTime={post.readingTime}
-				showImage={false}
+				coverImage={post.coverImage}
+				showImage={true}
 			/>
 		{/each}
 	</div>

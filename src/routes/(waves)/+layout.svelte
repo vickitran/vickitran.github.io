@@ -1,5 +1,6 @@
 <script>
 	import Waves from '$lib/components/organisms/Waves.svelte';
+	import Snow from '$lib/components/organisms/Snow.svelte';
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
 
@@ -25,6 +26,7 @@
 </svelte:head>
 
 <Waves />
+<Snow />
 
 <Header />
 

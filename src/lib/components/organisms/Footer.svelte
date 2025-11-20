@@ -10,24 +10,7 @@
 		<FooterWave />
 	</div>
 	<div class="content">
-		<div class="copyright">
-			This template was built by <a
-				href="https://fantinel.dev?utm_source=site-template"
-				target="_blank"
-				rel="noopener noreferrer">Matheus Fantinel</a
-			>.
-		</div>
-		<div class="credits">
-			Powered by <a href="https://kit.svelte.dev/" target="_blank" rel="noopener noreferrer"
-				>SvelteKit</a
-			>. Icons by
-			<a href="https://iconoir.com/" target="_blank" rel="noopener noreferrer">Iconoir</a>.
-		</div>
-		<div class="socials">
-			<Socials />
-			<RssLink />
-			<ThemeToggle />
-		</div>
+		<div class="copyright">Built with 💖 by Victoria Labmayr</div>
 	</div>
 </footer>
 
@@ -35,30 +18,24 @@
 	footer {
 		height: 340px;
 		width: 100%;
-		background: linear-gradient(60deg, var(--color--waves-start) 0%, var(--color--waves-end) 100%);
+		// background: linear-gradient(60deg, var(--color--waves-start) 0%, var(--color--waves-end) 100%);
 		display: grid;
 		grid-template-rows: 120px 1fr;
 
 		.content {
+			background: linear-gradient(
+				60deg,
+				var(--color--waves-start) 0%,
+				var(--color--waves-end) 100%
+			);
+
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			gap: 15px;
+			// gap: 15px;
 			font-weight: 600;
 			text-align: center;
-
-			.credits {
-				font-weight: 400;
-				font-size: 90%;
-				color: var(--color--text-shade);
-			}
-
-			.socials {
-				display: flex;
-				align-items: center;
-				gap: 20px;
-			}
 		}
 
 		a {
