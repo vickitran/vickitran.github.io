@@ -87,6 +87,12 @@
 		margin-top: 20px;
 	}
 
+	:global(.blog-post-card .image) {
+		min-height: 250px;
+		max-height: 300px;
+		flex: 1;
+	}
+
 	:global(.blog-post-card .image img) {
 		width: 100%;
 		height: 100%;
