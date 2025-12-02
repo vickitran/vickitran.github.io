@@ -1,7 +1,7 @@
 ---
 slug: 2025-reading-wrap
 title: My 2025 Reading Wrap-Up
-coverImage: /images/posts/books.png
+coverImage: ""
 excerpt: A year of reading tracked, with reflections on the books that made an impression.
 date: 2025-11-20T20:17:48.128Z
 updated: null
