@@ -10,7 +10,14 @@
 		<FooterWave />
 	</div>
 	<div class="content">
-		<div class="copyright">Built with 💖 by Victoria Labmayr</div>
+		<div class="copyright">Modified with 💖 by Victoria Labmayr</div>
+		<!-- <div class="copyright" style="font-size: 8px;">
+			This template was built by <a
+				href="https://fantinel.dev?utm_source=site-template"
+				target="_blank"
+				rel="noopener noreferrer">Matheus Fantinel</a
+			>.
+		</div> -->
 	</div>
 </footer>
 

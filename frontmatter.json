@@ -65,8 +65,8 @@
   "frontMatter.content.publicFolder": "",
   "frontMatter.content.pageFolders": [
     {
-      "title": "vickitran.github.io",
-      "path": "[[workspace]]/vickitran.github.io"
+      "title": "routes",
+      "path": "[[workspace]]/src/routes"
     }
   ]
 }
