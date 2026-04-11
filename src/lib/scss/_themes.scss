@@ -1,91 +1,88 @@
 @import '$lib/scss/_mixins.scss';
 
 @mixin base-theme {
-	// Primary: Dusty rose/mauve inspired by the desert rocks
-	@include define-color('primary', #C9948A);
-	@include define-color('primary-shade', #E5C4BE);	
-	@include define-color('primary-tint', #FBF5F4);
+	// ── Victoria Labmayr brand system ─────────────────────────────────────
 
-	// Secondary: Warm terracotta/burnt orange from the desert landscape
-	@include define-color('secondary', #D97448);
-	@include define-color('secondary-shade', #F4B896);
-	@include define-color('secondary-tint', #FFF7F2);
+	// Sage Dark — primary actions, links, headings accent (AAA contrast)
+	@include define-color('primary', #3D5C3A);
+	@include define-color('primary-shade', #A8C2A3);
+	@include define-color('primary-tint', #D4E6D1);
 
-	// Accent: That signature turquoise from the film's sky and details
-	@include define-color('yellow', #5DBAB3);
+	// Rose Dark — accent, highlights, callouts (AAA contrast)
+	@include define-color('secondary', #A8324A);
+	@include define-color('secondary-shade', #E07088);
+	@include define-color('secondary-tint', #FEF2F4);
 
-	// Text: Deep charcoal with warm undertones
-	@include define-color('text', #3A3128);
-	@include define-color('text-shade', #736B60);
-	@include define-color('text-inverse', #FFF9F5);
-	@include define-color('text-inverse-shade', #D4C9BE);
+	// Amber — third category
+	@include define-color('yellow', #C47A2B);
 
-	// Backgrounds: Warm cream and beige tones from the desert motel
-	@include define-color('page-background', #F5EDE5);
-	@include define-color('post-page-background', #FAF6F1);
-	@include define-color('card-background', #FFFCF9);
+	// Text: Ink — deep warm near-black
+	@include define-color('text', #1C2B1A);
+	@include define-color('text-shade', #8A8780);
+	@include define-color('text-inverse', #FEFDFB);
+	@include define-color('text-inverse-shade', #D4E6D1);
 
-	// Callouts with Asteroid City color story
-	@include define-color('callout-background', #F5EDE5);
-	@include define-color('callout-background--info', #E3F4F3);
-	@include define-color('callout-accent--info', #5DBAB3);
-	@include define-color('callout-background--warning', #FCEEE6);
-	@include define-color('callout-accent--warning', #D97448);
-	@include define-color('callout-background--error', #F4E3E0);
-	@include define-color('callout-accent--error', #C16B5C);
-	@include define-color('callout-background--success', #E8EDE3);
-	@include define-color('callout-accent--success', #7A9B76);
+	// Backgrounds: Canvas warm off-white
+	@include define-color('page-background', #F4F2EB);
+	@include define-color('post-page-background', #FEFDFB);
+	@include define-color('card-background', #FEFDFB);
 
-	// Code blocks: Deep desert night sky
-	@include define-color('code-background', #2A2419);
-	@include define-color('code-text', #FFF9F5);
-	@include define-color('code-inline-background', #E8DFD5);
+	// Callouts
+	@include define-color('callout-background', #F4F2EB);
+	@include define-color('callout-background--info', #D4E6D1);
+	@include define-color('callout-accent--info', #3D5C3A);
+	@include define-color('callout-background--warning', #FFF8F0);
+	@include define-color('callout-accent--warning', #C47A2B);
+	@include define-color('callout-background--error', #FEF2F4);
+	@include define-color('callout-accent--error', #A8324A);
+	@include define-color('callout-background--success', #D4E6D1);
+	@include define-color('callout-accent--success', #2A7A6E);
 
-	--color--waves-start: rgba(var(--color--primary-rgb), 0.3);
-	--color--waves-end: rgba(var(--color--primary-rgb), 0.1);
+	// Code blocks
+	@include define-color('code-background', #1A1F18);
+	@include define-color('code-text', #FEFDFB);
+	@include define-color('code-inline-background', #E5E3DC);
 
-	--card-shadow: 0px 4px 10px 0px rgba(58, 49, 40, 0.08);
-	--card-shadow-hover: 0px 4px 10px 8px rgba(58, 49, 40, 0.12);
-	--image-shadow: 8px 14px 38px rgba(58, 49, 40, 0.06), 1px 3px 8px rgba(58, 49, 40, 0.03);
+	--color--waves-start: rgba(var(--color--primary-rgb), 0.18);
+	--color--waves-end:   rgba(var(--color--primary-rgb), 0.06);
+
+	--card-shadow:       0px 2px 8px 0px rgba(28, 43, 26, 0.07);
+	--card-shadow-hover: 0px 8px 28px 0px rgba(28, 43, 26, 0.13);
+	--image-shadow:      6px 12px 32px rgba(28, 43, 26, 0.07), 1px 3px 8px rgba(28, 43, 26, 0.04);
 }
 
 @mixin dark-theme {
-	// Primary: Cooler evening desert rose
-	@include define-color('primary', #D9A99E);
-	@include define-color('primary-shade', #8B5B52);	
-	@include define-color('primary-tint', #342B27);
+	// Dark: deep forest ink backgrounds
+	@include define-color('primary', #6B8C65);
+	@include define-color('primary-shade', #3D5C3A);
+	@include define-color('primary-tint', #1C2B1A);
 
-	// Secondary: Muted sunset orange for night mode
-	@include define-color('secondary', #E89268);
-	@include define-color('secondary-shade', #8B4A2F);
-	@include define-color('secondary-tint', #2B2320);
+	@include define-color('secondary', #E07088);
+	@include define-color('secondary-shade', #A8324A);
+	@include define-color('secondary-tint', #2A1018);
 
-	// Accent: Moonlit turquoise
-	@include define-color('yellow', #6DCBC3);
+	@include define-color('yellow', #C47A2B);
 
-	// Text: Warm off-white for comfortable night reading
-	@include define-color('text', #FFF9F5);
-	@include define-color('text-shade', #D4C9BE);
-	@include define-color('text-inverse', #3A3128);
-	@include define-color('text-inverse-shade', #736B60);
+	@include define-color('text', #FEFDFB);
+	@include define-color('text-shade', #A8C2A3);
+	@include define-color('text-inverse', #1C2B1A);
+	@include define-color('text-inverse-shade', #3D5C3A);
 
-	// Backgrounds: Deep desert night tones
-	@include define-color('page-background', #2A2419);
-	@include define-color('post-page-background', #1F1B14);
-	@include define-color('card-background', #3D342A);
+	@include define-color('page-background', #1C2B1A);
+	@include define-color('post-page-background', #161F15);
+	@include define-color('card-background', #243322);
 
-	// Callouts for dark mode
-	@include define-color('callout-background', #3D342A);
-	@include define-color('callout-background--info', #2B4844);
-	@include define-color('callout-accent--info', #7DD4CC);
-	@include define-color('callout-background--warning', #4A3328);
-	@include define-color('callout-accent--warning', #F4B896);
-	@include define-color('callout-background--error', #4A302D);
-	@include define-color('callout-accent--error', #E5A399);
-	@include define-color('callout-background--success', #2F3B2D);
-	@include define-color('callout-accent--success', #9BB897);
+	@include define-color('callout-background', #243322);
+	@include define-color('callout-background--info', #1E3320);
+	@include define-color('callout-accent--info', #6B8C65);
+	@include define-color('callout-background--warning', #2A2010);
+	@include define-color('callout-accent--warning', #C47A2B);
+	@include define-color('callout-background--error', #2A1018);
+	@include define-color('callout-accent--error', #E07088);
+	@include define-color('callout-background--success', #1A2E28);
+	@include define-color('callout-accent--success', #2A7A6E);
 
-	@include define-color('code-inline-background', #453C31);
+	@include define-color('code-inline-background', #2A3828);
 }
 
 :root {

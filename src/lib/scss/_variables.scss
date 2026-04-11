@@ -1,13 +1,16 @@
 :root {
-	// Fonts
-	--font--default: Inter, sans-serif;
-	--font--title: Merriweather, serif;
-	--font--mono: Ubuntu Mono, monospace;
+	// ── Victoria Labmayr brand fonts ──────────────────────────────────────
+	// Display/titles: Georgia (serif, editorial weight 400)
+	// Body/UI:        DM Sans (clean, warm, humanist)
+	// Mono:           JetBrains Mono
+	--font--default: 'DM Sans', system-ui, sans-serif;
+	--font--title:   Georgia, 'Times New Roman', serif;
+	--font--mono:    'JetBrains Mono', 'Fira Code', monospace;
 
-	// Grabbed from open-props.style
-	--ease-3: cubic-bezier(0.25, 0, 0.3, 1);
-	--ease-4: cubic-bezier(0.25, 0, 0.2, 1);
-	--ease-out-1: cubic-bezier(0, 0, 0.75, 1);
-	--ease-out-3: cubic-bezier(0, 0, 0.3, 1);
+	// Easing curves
+	--ease-3:         cubic-bezier(0.25, 0, 0.3, 1);
+	--ease-4:         cubic-bezier(0.25, 0, 0.2, 1);
+	--ease-out-1:     cubic-bezier(0, 0, 0.75, 1);
+	--ease-out-3:     cubic-bezier(0, 0, 0.3, 1);
 	--ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 }

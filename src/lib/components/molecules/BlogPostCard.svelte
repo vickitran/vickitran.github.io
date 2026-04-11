@@ -24,16 +24,12 @@
 		{/if}
 	</div>
 	<div class="content" slot="content">
-		<p class="title">
-			{title}
-		</p>
+		<p class="title">{title}</p>
 		{#if readingTime}
 			<div class="note">{readingTime}</div>
 		{/if}
 		{#if excerpt}
-			<p class="text">
-				{excerpt}
-			</p>
+			<p class="text">{excerpt}</p>
 		{/if}
 	</div>
 	<div class="footer" slot="footer">
@@ -51,53 +47,80 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		gap: 0px;
+		gap: 4px;
 		align-items: flex-start;
 	}
 
 	.title {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		font-family: var(--font--title);   // Georgia — editorial
+		font-size: 1.15rem;
+		font-weight: 400;
+		line-height: 1.3;
+		letter-spacing: -0.01em;
+		color: var(--color--text);
 		width: 100%;
-		font-size: 1.2rem;
-		font-family: var(--font--title);
-		font-weight: 700;
+	}
+
+	.note {
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color--text-shade);
+		margin-top: 4px;
+	}
+
+	.text {
+		margin-top: 8px;
+		font-size: 0.875rem;
+		line-height: 1.65;
+		color: var(--color--text-shade);
+		/* clamp to 3 lines so cards stay uniform even with long excerpts */
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.footer {
+		margin-top: 16px;
 	}
 
 	.tags {
 		display: flex;
 		align-items: center;
-		gap: 5px;
+		gap: 6px;
 		flex-wrap: wrap;
 	}
 
-	.note {
-		font-size: 0.8rem;
-		color: rgba(var(--color--text-rgb), 0.8);
+	/* Force every card to be horizontal like the featured first card */
+	:global(.blog-post-card) {
+		flex-direction: row;
+		height: 180px;
 	}
 
-	.text {
-		margin-top: 5px;
-		font-size: 0.9rem;
-		text-align: justify;
-	}
-
-	.footer {
-		margin-top: 20px;
+	:global(.blog-post-card > .body) {
+		flex: 1;
+		overflow: hidden;
+		justify-content: center;
 	}
 
 	:global(.blog-post-card .image) {
-		min-height: 250px;
-		max-height: 300px;
-		flex: 1;
+		flex: 0 0 260px;
+		min-height: unset;
+		max-height: unset;
 	}
 
 	:global(.blog-post-card .image img) {
 		width: 100%;
 		height: 100%;
-		border-radius: 8px;
+		border-radius: 0;
 		object-fit: cover;
+	}
+
+	:global(.blog-post-card.no-image) {
+		/* no image — text fills full width, left border accent instead */
+		border-left: 4px solid var(--color--primary);
 	}
 
 	:global(.blog-post-card.no-image > .image) {

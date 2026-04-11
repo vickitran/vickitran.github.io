@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx svelte-check:*)",
+      "Bash(npx vite:*)",
+      "Bash(node -e ':*)",
+      "Bash(ls -la /Users/victoriatran/Documents/vickitran.github.io/src/lib/components/charts/Slope*)",
+      "WebFetch(domain:see-mike-out.github.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm ls:*)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebSearch",
+      "WebFetch(domain:ar5iv.labs.arxiv.org)",
+      "Bash(find /Users/victoriatran/Documents/vickitran.github.io/src -type f \\\\\\( -name \"*.svelte\" -o -name \"*.ts\" -o -name \"*.js\" -o -name \"*.scss\" \\\\\\) -exec wc -l {} +)"
+    ]
+  }
+}

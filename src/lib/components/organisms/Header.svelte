@@ -24,18 +24,18 @@
 
 	header {
 		position: relative;
-		padding: 30px 0;
+		padding: 24px 0;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.3s ease, background 0.3s ease;
 
 		@include for-phone-only {
-			padding: 20px 0;
+			padding: 16px 0;
 		}
 
 		&.has-background {
-			background: linear-gradient(
-				60deg,
-				var(--color--waves-start) 0%,
-				var(--color--waves-end) 100%
-			);
+			background: rgba(var(--color--page-background-rgb, 244, 242, 235), 0.88);
+			backdrop-filter: blur(10px);
+			border-bottom-color: rgba(var(--color--primary-rgb), 0.15);
 		}
 
 		.container {
@@ -44,10 +44,8 @@
 			gap: 30px;
 
 			@include for-phone-only {
-				.links {
-					a {
-						display: none;
-					}
+				.links a {
+					display: none;
 				}
 			}
 		}
@@ -65,15 +63,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-end;
-			gap: 30px;
+			gap: 28px;
 			margin-left: auto;
 
 			a {
+				font-size: 0.8rem;
+				font-weight: 500;
+				letter-spacing: 0.07em;
+				text-transform: uppercase;
 				text-decoration: none;
+				color: var(--color--text-shade);
+				transition: color 0.2s ease;
 
 				&:hover {
 					color: var(--color--primary);
-					filter: drop-shadow(0px 0px 3px var(--color--primary));
+					text-underline-offset: unset;
 				}
 			}
 		}

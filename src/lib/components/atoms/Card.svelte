@@ -9,11 +9,7 @@
 	export let rel = isExternalLink ? 'noopener noreferrer' : undefined;
 
 	$: tag = href ? 'a' : 'article';
-	$: linkProps = {
-		href,
-		target,
-		rel
-	};
+	$: linkProps = { href, target, rel };
 </script>
 
 <svelte:element
@@ -45,8 +41,9 @@
 		background: var(--color--card-background);
 		box-shadow: var(--card-shadow);
 		color: var(--color--text);
-		border-radius: 10px;
-		transition: all 0.4s ease;
+		border-radius: 4px;                      // brand: 3px–6px, using 4px
+		border: 1px solid rgba(var(--color--primary-rgb), 0.12);
+		transition: transform 0.25s var(--ease-3), box-shadow 0.25s var(--ease-3), border-color 0.25s;
 		position: relative;
 		overflow: hidden;
 		width: 100%;
@@ -62,7 +59,8 @@
 			cursor: pointer;
 			&:hover {
 				box-shadow: var(--card-shadow-hover);
-				transform: scale(1.01);
+				transform: translateY(-3px);
+				border-color: rgba(var(--color--primary-rgb), 0.3);
 			}
 		}
 	}
@@ -72,7 +70,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 10px;
-		padding: 20px 20px;
+		padding: 22px 24px;
 		flex: 1 0 50%;
 
 		.content {
@@ -85,9 +83,8 @@
 	.image {
 		position: relative;
 		flex: 1 0 max(50%, 330px);
-		// height: min(100%, 300px);
-		min-height: 280px;
-		max-height: 350px;
+		min-height: 260px;
+		max-height: 340px;
 	}
 
 	:global(.card [slot='image']) {

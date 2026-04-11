@@ -10,31 +10,39 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 15px;
+		gap: 18px;
 		position: relative;
-		padding: 80px 0;
+		padding: 88px 0 64px;
 
 		@include for-phone-only {
-			padding: 40px 0 50px;
+			padding: 48px 0 40px;
 		}
 
 		.hello {
 			text-align: center;
+			font-family: var(--font--title);
+			font-size: 3.6rem;
+			font-weight: 400;           // Georgia displays beautifully at 400
+			letter-spacing: -0.03em;
+			color: var(--color--text);
+			line-height: 1;
+
+			@include for-phone-only {
+				font-size: 2.6rem;
+			}
 		}
 
 		.intro {
-			font-weight: 500;
-			font-size: 1.4rem;
+			font-weight: 400;
+			font-size: 1.15rem;
 			width: min(100%, 440px);
 			display: flex;
 			flex-direction: column;
+			color: var(--color--text-shade);
+			line-height: 1.6;
 
-			.left {
-				text-align: left;
-			}
-			.right {
-				text-align: right;
-			}
+			.left  { text-align: left; }
+			.right { text-align: right; }
 
 			@include for-phone-only {
 				display: none;

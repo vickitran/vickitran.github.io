@@ -16,15 +16,10 @@ export const importPosts = (render = false) => {
 
   const imports = { ...blogImports, ...innerImports };
 
-  console.log('=== GLOB DEBUG ===');
-  console.log('Files found by glob:', Object.keys(imports));
-  console.log('==================');
-
   const posts: BlogPost[] = [];
   for (const path in imports) {
     const post = imports[path] as any;
     if (post) {
-      console.log('Processing:', path, '-> slug:', post.metadata?.slug);
       posts.push({
         ...post.metadata,
         html: render && post.default.render ? post.default.render()?.html : undefined,
@@ -32,7 +27,6 @@ export const importPosts = (render = false) => {
     }
   }
 
-  console.log('Total posts loaded:', posts.length);
   return posts;
 }
 

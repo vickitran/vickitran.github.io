@@ -10,44 +10,41 @@
 		<FooterWave />
 	</div>
 	<div class="content">
-		<div class="copyright">Modified with 💖 by Victoria Labmayr</div>
-		<!-- <div class="copyright" style="font-size: 8px;">
-			This template was built by <a
-				href="https://fantinel.dev?utm_source=site-template"
-				target="_blank"
-				rel="noopener noreferrer">Matheus Fantinel</a
-			>.
-		</div> -->
+		<div class="copyright">Modified with 💚 by Victoria Labmayr</div>
 	</div>
 </footer>
 
 <style lang="scss">
 	footer {
-		height: 340px;
+		height: 300px;
 		width: 100%;
-		// background: linear-gradient(60deg, var(--color--waves-start) 0%, var(--color--waves-end) 100%);
 		display: grid;
-		grid-template-rows: 120px 1fr;
+		grid-template-rows: 100px 1fr;
 
 		.content {
 			background: linear-gradient(
-				60deg,
+				150deg,
 				var(--color--waves-start) 0%,
 				var(--color--waves-end) 100%
 			);
+			border-top: 1px solid rgba(var(--color--primary-rgb), 0.15);
 
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			// gap: 15px;
-			font-weight: 600;
+			font-weight: 500;
+			font-size: 0.85rem;
 			text-align: center;
+			color: var(--color--text-shade);
+			letter-spacing: 0.02em;
 		}
 
 		a {
+			color: var(--color--text);
+			text-decoration: none;
 			&:hover {
-				filter: drop-shadow(0px 0px 3px var(--color--primary));
+				color: var(--color--primary);
 			}
 		}
 	}

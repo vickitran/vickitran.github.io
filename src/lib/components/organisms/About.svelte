@@ -30,28 +30,39 @@
 		grid-template-columns: 500px 250px;
 		align-items: center;
 		justify-content: center;
-		gap: 30px;
-		padding-bottom: 50px;
+		gap: 48px;
+		padding-bottom: 56px;
 
 		@include for-phone-only {
 			grid-template-columns: 1fr;
 			justify-items: center;
-			gap: 20px;
+			gap: 28px;
 		}
 
 		.info {
 			display: flex;
 			flex-direction: column;
-			gap: 10px;
+			gap: 14px;
+
 			h2 {
+				font-family: var(--font--title);
+				font-weight: 400;
+				font-size: 1.75rem;
+				letter-spacing: -0.015em;
+				line-height: 1.2;
+
 				@include for-phone-only {
 					text-align: center;
 				}
 			}
 
 			p {
+				font-size: 1rem;
+				line-height: 1.7;
+				color: var(--color--text-shade);
+
 				@include for-phone-only {
-					text-align: justify;
+					text-align: center;
 				}
 			}
 
@@ -63,20 +74,35 @@
 		.socials {
 			display: flex;
 			align-items: center;
-			gap: 15px;
+			gap: 14px;
+			margin-top: 4px;
+
+			span {
+				font-size: 0.8rem;
+				font-weight: 500;
+				letter-spacing: 0.07em;
+				text-transform: uppercase;
+				color: var(--color--text-shade);
+			}
 
 			@include for-phone-only {
 				justify-content: center;
 				margin-bottom: 10px;
-				span {
-					display: none;
-				}
+				span { display: none; }
 			}
 		}
 
 		.image {
-			width: 300px;
-			height: 300px;
+			width: 260px;
+			height: 260px;
+			border-radius: 4px;
+			overflow: hidden;
+			box-shadow: var(--image-shadow);
+
+			@include for-phone-only {
+				width: 200px;
+				height: 200px;
+			}
 		}
 	}
 </style>

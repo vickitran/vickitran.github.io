@@ -13,10 +13,6 @@ export type TagType = {
   color?: 'primary' | 'secondary'
 }
 
-export type SocialLink = {
-  
-}
-
 export type Feature = {
   name: string,
   description: string,
