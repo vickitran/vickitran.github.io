@@ -19,6 +19,7 @@ keywords: []
   import RidgeLineDensity from '$lib/components/charts/RidgeLineDensity.svelte'
   import SmallMultipleLines from '$lib/components/charts/SmallMultipleLines.svelte'
   import Sonification from '$lib/components/charts/Sonification.svelte'
+  import Pressfreedommap from '$lib/components/charts/Pressfreedommap.svelte'
 
   const treemapData = {
     name: 'root',
@@ -1704,4 +1705,11 @@ Resources:
   title="Day 11: Physical - Time Spent on Aerobic physical activity by European Country"
   subtitle="One third of Europeans spent at least 150 minutes per week on physical activity in 2019."
   source="eurostat"
+/>
+
+<Pressfreedommap
+  title="Day 12:Reporters Without Borders - World Press Freedom Index 2025"
+  source="Reporters Without Borders (RSF)"
+  width={960}
+  height={560}
 />
