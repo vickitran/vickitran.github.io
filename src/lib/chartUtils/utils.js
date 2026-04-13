@@ -1,9 +1,27 @@
 // vl chart utilities
-// Import what you need: import { addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils.js'
-// All functions expect a d3 selection (svg) and your theme imports
+// Import what you need:
+//   import { createSvg, createDataBox, addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js'
 
 import * as d3 from 'd3';
 import { colors, type, spacing, furniture } from './theme.js';
+
+// ---------------------------------------------------------------------------
+// createSvg — standard SVG container with viewBox, a11y, and canvas styling
+// ---------------------------------------------------------------------------
+export function createSvg(container, { width, height, ariaLabel }) {
+	return d3
+		.select(container)
+		.append('svg')
+		.attr('width', width)
+		.attr('height', height)
+		.attr('viewBox', `0 0 ${width} ${height}`)
+		.attr('role', 'img')
+		.attr('aria-label', ariaLabel)
+		.style('background', colors.canvas)
+		.style('font-family', type.sans)
+		.style('max-width', '100%')
+		.style('height', 'auto');
+}
 
 // ---------------------------------------------------------------------------
 // addFurniture — title, subtitle, source · byline footer
@@ -109,6 +127,179 @@ export function addA11yTable(svgNode, { caption = '', columns = [], rows = [] } 
 
 	container.appendChild(wrapper);
 	return wrapper;
+}
+
+// ---------------------------------------------------------------------------
+// createDataBox — lower-level data box for charts with custom value formatting
+// Usage:
+//   const box = createDataBox(svg, { width, fields: [{ key, label }], y, prompt })
+//   box.show({ key: 'formatted value', ... }, accentColor)
+//   box.clear()
+//   box.btnG.on('click', handler)   // wire your own clear handler
+// ---------------------------------------------------------------------------
+export function createDataBox(
+	svg,
+	{
+		width = 800,
+		fields = [],
+		y = 72,
+		prompt = 'Tap a data point to explore'
+	} = {}
+) {
+	const L = spacing.marginDefault.left;
+	const PAD_X = 14;
+	const PAD_Y = 8;
+	const KEY_SIZE = 11;
+	const VAL_SIZE = 15;
+	const BOX_H = KEY_SIZE + 4 + VAL_SIZE + PAD_Y * 2;
+
+	const g = svg
+		.append('g')
+		.attr('class', 'vl-databox')
+		.attr('transform', `translate(${L}, ${y})`);
+
+	const bgRect = g
+		.append('rect')
+		.attr('height', BOX_H)
+		.attr('rx', 4)
+		.attr('fill', '#EDE8DC')
+		.style('opacity', 0);
+
+	const accentBar = g
+		.append('rect')
+		.attr('width', 4)
+		.attr('height', BOX_H)
+		.attr('rx', 2)
+		.attr('fill', colors.ink)
+		.style('opacity', 0);
+
+	const promptEl = g
+		.append('text')
+		.attr('x', PAD_X)
+		.attr('y', BOX_H / 2 + 4)
+		.style('font-family', type.sans)
+		.style('font-size', '13px')
+		.style('fill', colors.warmGray)
+		.style('font-style', 'italic')
+		.text(prompt);
+
+	const fieldGroups = [];
+	fields.forEach((f, i) => {
+		const fg = g.append('g').style('opacity', 0);
+		let sep = null;
+		if (i > 0) {
+			sep = fg
+				.append('rect')
+				.attr('y', PAD_Y)
+				.attr('width', 1)
+				.attr('height', BOX_H - PAD_Y * 2)
+				.attr('fill', '#C8C3B8');
+		}
+		const keyEl = fg
+			.append('text')
+			.attr('y', PAD_Y + KEY_SIZE)
+			.style('font-family', type.sans)
+			.style('font-size', `${KEY_SIZE}px`)
+			.style('fill', colors.warmGray)
+			.style('letter-spacing', '0.06em')
+			.text(f.label);
+		const valEl = fg
+			.append('text')
+			.attr('y', PAD_Y + KEY_SIZE + 4 + VAL_SIZE)
+			.style('font-family', type.sans)
+			.style('font-size', `${VAL_SIZE}px`)
+			.style('font-weight', 500)
+			.style('fill', colors.ink)
+			.text('');
+		fieldGroups.push({ key: f.key, fg, sep, keyEl, valEl });
+	});
+
+	function reflow() {
+		let cursor = PAD_X;
+		fieldGroups.forEach(({ sep, keyEl, valEl }, i) => {
+			if (i > 0) {
+				sep.attr('x', cursor);
+				cursor += 1 + 12;
+			}
+			keyEl.attr('x', cursor);
+			valEl.attr('x', cursor);
+			cursor +=
+				Math.max(keyEl.node().getComputedTextLength(), valEl.node().getComputedTextLength()) +
+				PAD_X;
+		});
+		bgRect.attr('width', cursor + 4);
+		accentBar.attr('x', cursor);
+	}
+
+	// Clear button
+	const BTN_W = 54;
+	const BTN_H = 18;
+	const BTN_X = width - spacing.marginDefault.right - BTN_W;
+	const BTN_Y = y + (BOX_H - BTN_H) / 2;
+
+	const btnG = svg
+		.append('g')
+		.attr('transform', `translate(${BTN_X}, ${BTN_Y})`)
+		.style('cursor', 'pointer')
+		.style('opacity', 0)
+		.style('pointer-events', 'none')
+		.attr('role', 'button')
+		.attr('tabindex', 0)
+		.attr('aria-label', 'Clear selection');
+
+	btnG
+		.append('rect')
+		.attr('width', BTN_W)
+		.attr('height', BTN_H)
+		.attr('rx', 3)
+		.attr('fill', 'none')
+		.attr('stroke', colors.warmGray)
+		.attr('stroke-width', 1)
+		.attr('stroke-dasharray', '3,2');
+
+	btnG
+		.append('text')
+		.attr('x', BTN_W / 2)
+		.attr('y', 12)
+		.attr('text-anchor', 'middle')
+		.style('font-family', type.sans)
+		.style('font-size', '12px')
+		.style('fill', colors.warmGray)
+		.text('clear ✕');
+
+	return {
+		show(values, color) {
+			promptEl.style('opacity', 0);
+			bgRect.style('opacity', 1);
+			accentBar.attr('fill', color ?? colors.ink).style('opacity', 1);
+			fieldGroups.forEach(({ key, fg, valEl }) => {
+				valEl.text(values[key] ?? '');
+				if (color) valEl.style('fill', color);
+				fg.style('opacity', 1);
+			});
+			reflow();
+			btnG.style('opacity', 1).style('pointer-events', 'all');
+		},
+
+		setColor(color) {
+			fieldGroups.forEach(({ valEl }) => valEl.style('fill', color));
+			accentBar.attr('fill', color);
+		},
+
+		clear() {
+			promptEl.style('opacity', 1);
+			bgRect.style('opacity', 0);
+			accentBar.attr('fill', colors.ink).style('opacity', 0);
+			fieldGroups.forEach(({ fg, valEl }) => {
+				fg.style('opacity', 0);
+				valEl.style('fill', colors.ink);
+			});
+			btnG.style('opacity', 0).style('pointer-events', 'none');
+		},
+
+		btnG,
+		height: BOX_H
+	};
 }
 
 // ---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { colors, type, spacing } from '$lib/chartUtils/theme.js';
-	import { addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js';
+	import { createSvg, addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js';
 
 	// ---------------------------------------------------------------------------
 	// Props
@@ -145,18 +145,7 @@
 				.curve(d3.curveCatmullRom);
 
 		// --- SVG root ---
-		const svg = d3
-			.select(container)
-			.append('svg')
-			.attr('width', width)
-			.attr('height', svgH)
-			.attr('viewBox', `0 0 ${width} ${svgH}`)
-			.attr('role', 'img')
-			.attr('aria-label', `${title} — small multiple line chart`)
-			.style('background', colors.canvas)
-			.style('font-family', type.sans)
-			.style('max-width', '100%')
-			.style('height', 'auto');
+		const svg = createSvg(container, { width, height: svgH, ariaLabel: `${title} — small multiple line chart` });
 
 		// --- Furniture: title + subtitle + source ---
 		addFurniture(svg, { width, height: svgH, title, subtitle, source });

@@ -4,7 +4,7 @@ title: 30 Day Chart Challenge 2026
 coverImage: ""
 excerpt: A month long chart making routine
 date: 2026-04-01T10:15:02.320Z
-updated: 2026-04-10T12:09:12.037Z
+updated: 2026-04-12T07:39:48.805Z
 hidden: false
 tags: []
 keywords: []
@@ -20,6 +20,7 @@ keywords: []
   import SmallMultipleLines from '$lib/components/charts/SmallMultipleLines.svelte'
   import Sonification from '$lib/components/charts/Sonification.svelte'
   import Pressfreedommap from '$lib/components/charts/Pressfreedommap.svelte'
+  import MediaAttentionChart from '$lib/components/charts/MediaAttentionChart.svelte'
 
   const treemapData = {
     name: 'root',
@@ -1594,7 +1595,7 @@ const sportData = [
 
 </script>
 
-My 30 Day Chart Challenge Record in 2026 - 11/30 Charts
+My 30 Day Chart Challenge Record in 2026
 
 Resources:
 [Prompt List](https://github.com/30DayChartChallenge/Edition2026)
@@ -1713,3 +1714,5 @@ Resources:
   width={960}
   height={560}
 />
+
+<MediaAttentionChart/>

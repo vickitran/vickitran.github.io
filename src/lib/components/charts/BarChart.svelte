@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { colors, categorical, type, spacing } from '$lib/chartUtils/theme.js';
-	import { addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js';
+	import { createSvg, addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js';
 
 	// --- Props ---
 	export let data;
@@ -133,18 +133,7 @@
 			.nice();
 
 		// --- SVG root ---
-		const svg = d3
-			.select(container)
-			.append('svg')
-			.attr('width', width)
-			.attr('height', height)
-			.attr('viewBox', `0 0 ${width} ${height}`)
-			.attr('role', 'img')
-			.attr('aria-label', `${title} — grouped bar chart`)
-			.style('background', colors.canvas)
-			.style('font-family', type.sans)
-			.style('max-width', '100%')
-			.style('height', 'auto');
+		const svg = createSvg(container, { width, height, ariaLabel: `${title} — grouped bar chart` });
 
 		// --- Furniture: title, subtitle, source, byline ---
 		addFurniture(svg, { width, height, title, subtitle, source });
