@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { colors, categorical, type, spacing } from '$lib/chartUtils/theme.js';
-	import { createSvg, addFurniture, addDataBox, addA11yTable } from '$lib/chartUtils/utils.js';
+	import { createSvg, addFurniture, addA11yTable, createDataBox } from '$lib/chartUtils/utils.js';
 
 	// --- Props ---
 	export let data;
@@ -170,12 +170,16 @@
 		});
 
 		// --- Databox ---
-		const box = addDataBox(svg, {
+		const box = createDataBox(svg, {
 			width,
-			height,
-			fields: [categoryKey, groupKey, valueKey, 'pct'],
-			total,
-			y: 86
+			fields: [
+				{ key: categoryKey, label: categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1) },
+				{ key: groupKey, label: groupKey.charAt(0).toUpperCase() + groupKey.slice(1) },
+				{ key: 'value', label: 'Value' },
+				{ key: 'pct', label: 'Share' }
+			],
+			y: 86,
+			prompt: 'Tap a bar to explore'
 		});
 
 		// --- Chart group ---
@@ -252,7 +256,7 @@
 			.attr('class', 'vl-bar')
 			.attr('transform', (d) => `translate(${x1(d[groupKey])}, 0)`);
 
-		leaf
+		const barRects = leaf
 			.append('rect')
 			.attr('x', 0)
 			.attr('y', (d) => y(d[valueKey]))
@@ -262,89 +266,52 @@
 			.attr('fill', (d) => colorScale(d[groupKey]))
 			.attr('opacity', 0.88);
 
-		// --- Bind databox to bars ---
-		box.bind(
-			leaf,
-			(d) => ({
-				[categoryKey]: d[categoryKey],
-				[groupKey]: d[groupKey],
-				value: d[valueKey],
-				name: `${d[categoryKey]} · ${d[groupKey]}`
-			}),
-			(d) => colorScale(d[groupKey])
-		);
+		// --- Wire DataBox to bars ---
+		let activeBar = null;
 
-		// --- Selection: full-height vertical line + top bar rect ---
-		const selectionLine = g
-			.append('line')
-			.attr('class', 'vl-selection-line')
-			.attr('y1', 0)
-			.attr('y2', chartH)
-			.attr('stroke', colors.ink)
-			.attr('stroke-width', 1)
-			.attr('stroke-dasharray', '3,3')
-			.attr('pointer-events', 'none')
-			.attr('opacity', 0);
-
-		const HAT_H = 4; // height of the "hat" cap in px
-		const selectionRect = g
-			.append('rect')
-			.attr('class', 'vl-selection-rect')
-			.attr('rx', 1)
-			.attr('pointer-events', 'none')
-			.attr('opacity', 0);
-
-		let activeLeaf = null;
-
-		function clearOutline() {
-			activeLeaf = null;
-			selectionLine.attr('opacity', 0);
-			selectionRect.attr('opacity', 0);
+		function clearSelection() {
+			activeBar = null;
+			barRects.attr('opacity', 0.88);
+			box.clear();
 		}
 
-		leaf.on('click.outline touchstart.outline', function (event, d) {
-			if (event.type === 'touchstart') event.preventDefault();
-			event.stopPropagation(); // prevent svg background click from clearing immediately
-			const isSame = activeLeaf && activeLeaf.node() === this;
-			clearOutline();
-			if (!isSame) {
-				activeLeaf = d3.select(this);
-				const r = activeLeaf.select('rect');
-				const barW = +r.attr('width');
-				const barY = +r.attr('y');
+		barRects
+			.attr('role', 'button')
+			.attr('tabindex', 0)
+			.attr('aria-label', (d) => `${d[categoryKey]} · ${d[groupKey]}: ${d[valueKey].toLocaleString()}`)
+			.style('cursor', 'pointer')
+			.on('click.databox touchstart.databox keydown.databox', function (event, d) {
+				if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+				if (event.type === 'touchstart') event.preventDefault();
+				event.stopPropagation();
 
-				// Walk up DOM to accumulate translateX offsets
-				const barGroupTransform = activeLeaf.node().parentNode.getAttribute('transform') || '';
-				const catGroupTransform =
-					activeLeaf.node().parentNode.parentNode.getAttribute('transform') || '';
-				const barTx = parseFloat((barGroupTransform.match(/translate\(([\d.]+)/) || [, 0])[1]);
-				const catTx = parseFloat((catGroupTransform.match(/translate\(([\d.]+)/) || [, 0])[1]);
-				const absX = catTx + barTx + barW / 2;
+				const isSame = activeBar === this;
+				clearSelection();
+				if (isSame) return;
 
-				// Vertical guide line through full chart height
-				selectionLine.attr('x1', absX).attr('x2', absX).attr('opacity', 0.45);
+				activeBar = this;
+				barRects.attr('opacity', 0.25);
+				d3.select(this).attr('opacity', 1);
 
-				// Thin hat cap sitting just above the bar top
-				selectionRect
-					.attr('x', catTx + barTx)
-					.attr('y', barY - HAT_H - 2)
-					.attr('width', barW)
-					.attr('height', HAT_H)
-					.attr('fill', colors.ink)
-					.attr('opacity', 1);
-			}
+				const pct = `${((d[valueKey] / total) * 100).toFixed(1)}%`;
+				box.show(
+					{
+						[categoryKey]: d[categoryKey],
+						[groupKey]: d[groupKey],
+						value: d[valueKey].toLocaleString(),
+						pct
+					},
+					colorScale(d[groupKey])
+				);
+			});
+
+		svg.on('click.databox touchstart.databox', clearSelection);
+
+		box.btnG.on('click.databox touchstart.databox keydown.databox', function (event) {
+			if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+			event.stopPropagation();
+			clearSelection();
 		});
-
-		// Background SVG click clears selection (leaf clicks stop propagation so this won't double-fire)
-		svg.on('click.outline touchstart.outline', clearOutline);
-		svg.select('.vl-databox').selectAll('*').on('click.outline', null);
-		d3.select(container)
-			.select('svg')
-			.selectAll('g')
-			.filter(function () {
-				return d3.select(this).style('cursor') === 'pointer' && this !== leaf.node();
-			})
-			.on('click.outline', clearOutline);
 
 		// --- Accessibility table ---
 		addA11yTable(svg.node(), {

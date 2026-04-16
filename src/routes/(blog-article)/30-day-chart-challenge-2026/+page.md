@@ -21,6 +21,9 @@ keywords: []
   import Sonification from '$lib/components/charts/Sonification.svelte'
   import Pressfreedommap from '$lib/components/charts/Pressfreedommap.svelte'
   import MediaAttentionChart from '$lib/components/charts/MediaAttentionChart.svelte'
+  import Canadareciprocaltariffs from '$lib/components/charts/Canadareciprocaltariffs.svelte'
+  import Dragonbabies from '$lib/components/charts/Dragonbabies.svelte'
+  import Incidentsvsaireleases from '$lib/components/charts/Incidentsvsaireleases.svelte' 
 
   const treemapData = {
     name: 'root',
@@ -1644,15 +1647,14 @@ Resources:
   waveform="triangle"
 />
 
-<BarChart
-  data={flowingData}
-  categoryKey="country"
-  groupKey="president"
-  valueKey="value"
-  title="Day 6: Flowing Data - US allies have collapsed under Trump"
-  subtitle="Top Countries by Weighted UN Vote Correlation Coefficient"
-  source="Focal Data"
+
+<Pressfreedommap
+  title="Day 6:Reporters Without Borders - World Press Freedom Index 2025"
+  source="Reporters Without Borders (RSF)"
+  width={960}
+  height={560}
 />
+
 
 <SmallMultipleLines
   data={irrigationData}
@@ -1708,11 +1710,20 @@ Resources:
   source="eurostat"
 />
 
-<Pressfreedommap
-  title="Day 12:Reporters Without Borders - World Press Freedom Index 2025"
-  source="Reporters Without Borders (RSF)"
-  width={960}
-  height={560}
+<BarChart
+  data={flowingData}
+  categoryKey="country"
+  groupKey="president"
+  valueKey="value"
+  title="Day 12: Flowing Data - US allies have collapsed under Trump"
+  subtitle="Top Countries by Weighted UN Vote Correlation Coefficient"
+  source="Focal Data"
 />
-
+<!-- Day 13 -->
 <MediaAttentionChart/>
+<!-- Day 14 -->
+<Canadareciprocaltariffs />
+<!-- Day 15 -->
+<Dragonbabies />
+<!-- Day 16 -->
+<Incidentsvsaireleases />
