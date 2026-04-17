@@ -95,7 +95,7 @@
 		.image {
 			width: 260px;
 			height: 260px;
-			border-radius: 4px;
+			border-radius: 50%;
 			overflow: hidden;
 			box-shadow: var(--image-shadow);
 
