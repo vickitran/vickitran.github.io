@@ -4,7 +4,7 @@ title: 30 Day Chart Challenge 2026
 coverImage: ""
 excerpt: A month long chart making routine
 date: 2026-04-01T10:15:02.320Z
-updated: 2026-04-12T07:39:48.805Z
+updated: 2026-04-16T08:43:10.186Z
 hidden: false
 tags: []
 keywords: []
@@ -24,6 +24,7 @@ keywords: []
   import Canadareciprocaltariffs from '$lib/components/charts/Canadareciprocaltariffs.svelte'
   import Dragonbabies from '$lib/components/charts/Dragonbabies.svelte'
   import Incidentsvsaireleases from '$lib/components/charts/Incidentsvsaireleases.svelte' 
+  import Labourcosteurope from '$lib/components/charts/Labourcosteurope.svelte' 
 
   const treemapData = {
     name: 'root',
@@ -1727,3 +1728,5 @@ Resources:
 <Dragonbabies />
 <!-- Day 16 -->
 <Incidentsvsaireleases />
+<!-- Day 17 -->
+<Labourcosteurope />
