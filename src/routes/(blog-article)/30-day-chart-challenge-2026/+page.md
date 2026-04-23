@@ -29,7 +29,7 @@ keywords: []
   import Greatlakesfish from '$lib/components/charts/Greatlakesfish.svelte' 
   import ParcelSmallMultiples from '$lib/components/charts/ParcelSmallMultiples.svelte' 
   import Chlorea from '$lib/components/charts/Chlorea.svelte' 
-  import MozartConcerts from '$lib/components/charts/MozartConcerts.svelte' 
+  import Mozartconcerts from '$lib/components/charts/Mozartconcerts.svelte' 
 
   const treemapData = {
     name: 'root',
@@ -1748,4 +1748,4 @@ Resources:
 <!-- Day 21 -->
 <Chlorea/>
 <!-- Day 23 -->
-<MozartConcerts/>
+<Mozartconcerts/>
