@@ -4,7 +4,7 @@ title: 30 Day Chart Challenge 2026
 coverImage: ""
 excerpt: A month long chart making routine
 date: 2026-04-01T10:15:02.320Z
-updated: 2026-04-16T08:43:10.186Z
+updated: 2026-04-23T08:49:26.699Z
 hidden: false
 tags: []
 keywords: []
@@ -25,6 +25,11 @@ keywords: []
   import Dragonbabies from '$lib/components/charts/Dragonbabies.svelte'
   import Incidentsvsaireleases from '$lib/components/charts/Incidentsvsaireleases.svelte' 
   import Labourcosteurope from '$lib/components/charts/Labourcosteurope.svelte' 
+  import Iodineurbanruralstrip from '$lib/components/charts/Iodineurbanruralstrip.svelte' 
+  import Greatlakesfish from '$lib/components/charts/Greatlakesfish.svelte' 
+  import ParcelSmallMultiples from '$lib/components/charts/ParcelSmallMultiples.svelte' 
+  import Chlorea from '$lib/components/charts/Chlorea.svelte' 
+  import MozartConcerts from '$lib/components/charts/MozartConcerts.svelte' 
 
   const treemapData = {
     name: 'root',
@@ -1602,7 +1607,7 @@ const sportData = [
 My 30 Day Chart Challenge Record in 2026
 
 Resources:
-[Prompt List](https://github.com/30DayChartChallenge/Edition2026)
+[Prompt List](https://cdn.bsky.app/img/feed_fullsize/plain/did:plc:5afxdowmz7vehjbobw43h4bt/bafkreiejvkmocp4tbq6dy77eewvmmwmngow5obftc5f2avnrv7bce4lvxy)
 
 <Treemap
   data={treemapData}
@@ -1730,3 +1735,17 @@ Resources:
 <Incidentsvsaireleases />
 <!-- Day 17 -->
 <Labourcosteurope />
+<!-- Day 18 -->
+<Iodineurbanruralstrip />
+<!-- Day 19 -->
+<Greatlakesfish />
+<!-- Day 20 -->
+<ParcelSmallMultiples
+  width={960}
+  height={560}
+  source="UPU Postal Statistics"
+/>
+<!-- Day 21 -->
+<Chlorea/>
+<!-- Day 23 -->
+<MozartConcerts/>
